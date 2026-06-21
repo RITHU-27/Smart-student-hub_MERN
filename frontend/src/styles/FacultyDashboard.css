@@ -1,0 +1,266 @@
+.faculty-dashboard {
+  min-height: 100vh;
+  background-color: #f5f5f5;
+}
+
+.dashboard-header {
+  background-color: #2196F3;
+  color: white;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.achievements-section {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin-top: 2rem;
+}
+
+.achievements-list {
+  margin-top: 1rem;
+}
+
+.achievement-item {
+  border: 1px solid #e0e0e0;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  background: #fafafa;
+}
+
+.achievement-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.achievement-header h3 {
+  margin: 0;
+  color: #333;
+}
+
+.achievement-details p {
+  margin: 0.5rem 0;
+  color: #666;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.approve-btn {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.approve-btn:hover:not(:disabled) {
+  background-color: #45a049;
+}
+
+.reject-btn {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.reject-btn:hover:not(:disabled) {
+  background-color: #da190b;
+}
+
+.view-btn {
+  background-color: #2196F3;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.view-btn:hover {
+  background-color: #0b7dda;
+}
+
+.stat-card.pending {
+  border-top: 3px solid #ff9800;
+}
+
+.stat-card.approved {
+  border-top: 3px solid #4CAF50;
+}
+
+.stat-card.rejected {
+  border-top: 3px solid #f44336;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 600px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.detail-content p {
+  margin: 1rem 0;
+}
+
+.close-btn {
+  background-color: #666;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  margin-top: 1rem;
+}
+
+.close-btn:hover {
+  background-color: #555;
+}
+
+.no-data {
+  text-align: center;
+  color: #999;
+  padding: 3rem;
+  font-size: 1.1rem;
+}
+
+/* Achievement Actions Button Styles */
+.achievement-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 1rem;
+  padding: 12px 16px;
+  border-top: 1px solid #e0e0e0;
+  background-color: #f8f9fa;
+}
+
+.achievement-actions button {
+  padding: 8px 12px;
+  font-size: 13px;
+  min-width: 80px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  flex: 1;
+}
+
+.approve-btn {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.approve-btn:hover:not(:disabled) {
+  background-color: #45a049;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(76, 175, 80, 0.3);
+}
+
+.approve-btn:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.reject-btn {
+  background-color: #f44336;
+  color: white;
+}
+
+.reject-btn:hover:not(:disabled) {
+  background-color: #da190b;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(244, 67, 54, 0.3);
+}
+
+.reject-btn:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.details-btn {
+  background-color: #2196F3;
+  color: white;
+}
+
+.details-btn:hover {
+  background-color: #0b7dda;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(33, 150, 243, 0.3);
+}
+
+/* Modal button styles */
+.modal-footer button {
+  padding: 10px 16px;
+  font-size: 14px;
+  min-width: 90px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  margin-right: 8px;
+}
+
+.modal-footer button:last-child {
+  margin-right: 0;
+}
+
+.close-btn {
+  background-color: #666;
+  color: white;
+}
+
+.close-btn:hover {
+  background-color: #555;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(102, 102, 102, 0.3);
+}

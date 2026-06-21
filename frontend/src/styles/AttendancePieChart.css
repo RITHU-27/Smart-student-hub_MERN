@@ -1,0 +1,412 @@
+/* Attendance Pie Chart Styles */
+.attendance-pie-chart {
+  background: white;
+  border-radius: 15px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e1e8ed;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.attendance-pie-chart:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.attendance-pie-chart.small {
+  padding: 1rem;
+  max-width: 300px;
+}
+
+.attendance-pie-chart.large {
+  padding: 2rem;
+  max-width: 500px;
+}
+
+.chart-title {
+  margin: 0 0 1.5rem 0;
+  color: #2c3e50;
+  font-size: 1.3rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.attendance-pie-chart.small .chart-title {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.attendance-pie-chart.large .chart-title {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.chart-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.attendance-pie-chart.small .chart-container {
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.pie-chart-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pie-chart {
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+}
+
+.chart-segment {
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.chart-segment:hover {
+  filter: brightness(1.1);
+  transform-origin: center;
+}
+
+.percentage-text {
+  font-size: 1.8rem;
+  font-weight: 700;
+  fill: #2c3e50;
+  dominant-baseline: middle;
+}
+
+.attendance-pie-chart.small .percentage-text {
+  font-size: 1.4rem;
+}
+
+.attendance-pie-chart.large .percentage-text {
+  font-size: 2.2rem;
+}
+
+.status-text {
+  font-size: 0.9rem;
+  font-weight: 600;
+  dominant-baseline: middle;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.attendance-pie-chart.small .status-text {
+  font-size: 0.8rem;
+}
+
+.attendance-pie-chart.large .status-text {
+  font-size: 1rem;
+}
+
+.attendance-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 120px;
+}
+
+.attendance-pie-chart.small .attendance-stats {
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  min-width: auto;
+}
+
+.stat-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.stat-item:hover {
+  background: #e9ecef;
+  transform: translateX(5px);
+}
+
+.attendance-pie-chart.small .stat-item {
+  flex-direction: column;
+  text-align: center;
+  padding: 0.3rem;
+  min-width: 60px;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: #6c757d;
+  font-weight: 500;
+}
+
+.stat-value {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #2c3e50;
+}
+
+.attendance-pie-chart.small .stat-value {
+  font-size: 0.9rem;
+}
+
+.stat-value.present {
+  color: #27ae60;
+}
+
+.stat-value.absent {
+  color: #e74c3c;
+}
+
+.stat-value.late {
+  color: #f39c12;
+}
+
+.stat-value.excused {
+  color: #3498db;
+}
+
+.chart-legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e1e8ed;
+}
+
+.attendance-pie-chart.small .chart-legend {
+  gap: 0.5rem;
+  padding-top: 0.75rem;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: #6c757d;
+  transition: all 0.3s ease;
+}
+
+.legend-item:hover {
+  color: #2c3e50;
+  transform: scale(1.05);
+}
+
+.legend-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.attendance-pie-chart.small .legend-color {
+  width: 10px;
+  height: 10px;
+}
+
+/* Empty State */
+.empty-chart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 2rem;
+  text-align: center;
+  color: #6c757d;
+}
+
+.empty-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  opacity: 0.5;
+}
+
+.empty-chart p {
+  font-size: 1rem;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.attendance-pie-chart {
+  animation: fadeIn 0.6s ease-out;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .attendance-pie-chart {
+    padding: 1rem;
+  }
+  
+  .chart-container {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .attendance-stats {
+    width: 100%;
+    gap: 0.75rem;
+  }
+  
+  .stat-item {
+    padding: 0.75rem;
+  }
+  
+  .chart-legend {
+    gap: 0.75rem;
+  }
+  
+  .legend-item {
+    font-size: 0.75rem;
+  }
+  
+  .percentage-text {
+    font-size: 1.5rem;
+  }
+  
+  .status-text {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .attendance-pie-chart {
+    padding: 0.75rem;
+  }
+  
+  .chart-title {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .chart-container {
+    gap: 1rem;
+  }
+  
+  .attendance-stats {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 0.5rem;
+  }
+  
+  .stat-item {
+    flex-direction: column;
+    text-align: center;
+    padding: 0.5rem;
+    min-width: 70px;
+  }
+  
+  .stat-label {
+    font-size: 0.7rem;
+  }
+  
+  .stat-value {
+    font-size: 0.9rem;
+  }
+  
+  .chart-legend {
+    gap: 0.5rem;
+  }
+  
+  .legend-item {
+    font-size: 0.7rem;
+  }
+  
+  .legend-color {
+    width: 8px;
+    height: 8px;
+  }
+  
+  .percentage-text {
+    font-size: 1.3rem;
+  }
+  
+  .status-text {
+    font-size: 0.7rem;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .attendance-pie-chart {
+    background: #2c3e50;
+    border-color: #34495e;
+  }
+  
+  .chart-title {
+    color: #ecf0f1;
+  }
+  
+  .stat-item {
+    background: #34495e;
+  }
+  
+  .stat-item:hover {
+    background: #4a5f7a;
+  }
+  
+  .stat-label {
+    color: #bdc3c7;
+  }
+  
+  .stat-value {
+    color: #ecf0f1;
+  }
+  
+  .chart-legend {
+    border-color: #34495e;
+  }
+  
+  .legend-item {
+    color: #bdc3c7;
+  }
+  
+  .legend-item:hover {
+    color: #ecf0f1;
+  }
+  
+  .percentage-text {
+    fill: #ecf0f1;
+  }
+}
+
+/* Print styles */
+@media print {
+  .attendance-pie-chart {
+    box-shadow: none;
+    border: 1px solid #ccc;
+    page-break-inside: avoid;
+  }
+  
+  .chart-segment {
+    filter: none;
+  }
+  
+  .empty-icon {
+    display: none;
+  }
+}
