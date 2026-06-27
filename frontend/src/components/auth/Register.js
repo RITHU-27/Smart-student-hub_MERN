@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import '../../styles/Auth.css';
+import { API_BASE_URL } from '../../utils/constants';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -253,7 +254,7 @@ const Register = () => {
     try {
       console.log('Sending registration data:', formData);
 
-      await axios.post('http://localhost:5000/api/auth/register', formData);
+      await axios.post(`${API_BASE_URL}/api/auth/register`, formData);
 
       alert('Registration successful! Please login.');
       navigate('/login');

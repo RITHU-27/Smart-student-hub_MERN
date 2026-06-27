@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../../styles/AdminPanel.css';
+import { API_BASE_URL } from '../../utils/constants';
 
 const AIResumeBuilder = () => {
   const [studentData, setStudentData] = useState(null);
@@ -36,7 +37,7 @@ const AIResumeBuilder = () => {
       setError('');
       
       // Get student profile
-      const profileResponse = await axios.get(`http://localhost:5000/api/test/get-profile-dynamic?email=${user?.email}`, {
+      const profileResponse = await axios.get(`${API_BASE_URL}/api/test/get-profile-dynamic?email=${user?.email}`, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
@@ -44,7 +45,7 @@ const AIResumeBuilder = () => {
       });
       
       // Get achievements
-      const achievementsResponse = await axios.get(`http://localhost:5000/api/achievements/mine`, {
+      const achievementsResponse = await axios.get(`${API_BASE_URL}/api/achievements/mine`, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
@@ -68,7 +69,7 @@ const AIResumeBuilder = () => {
       setError('');
       setSuccess('');
       
-      const response = await axios.post('http://localhost:5000/api/ai-resume/generate-ai-resume', {
+      const response = await axios.post(`${API_BASE_URL}/api/ai-resume/generate-ai-resume`, {
         studentId: studentData._id,
         template: selectedTemplate,
         jobDescription: jobDescription,
@@ -85,7 +86,7 @@ const AIResumeBuilder = () => {
       setSuccess('AI Resume generated successfully!');
       
       // Generate resume score
-      const scoreResponse = await axios.post('http://localhost:5000/api/ai-resume/resume-score', {
+      const scoreResponse = await axios.post(`${API_BASE_URL}/api/ai-resume/resume-score`, {
         resumeContent: response.data.content
       }, {
         headers: {
@@ -108,7 +109,7 @@ const AIResumeBuilder = () => {
     try {
       const allText = achievements.map(a => `${a.title} ${a.description || ''}`).join(' ');
       
-      const response = await axios.post('http://localhost:5000/api/ai-resume/analyze-skills', {
+      const response = await axios.post(`${API_BASE_URL}/api/ai-resume/analyze-skills`, {
         text: allText
       }, {
         headers: {
@@ -127,7 +128,7 @@ const AIResumeBuilder = () => {
 
   const generateAIInsights = async () => {
     try {
-      const response = await axios.post('http://localhost:5000/api/ai-resume/ai-insights', {
+      const response = await axios.post(`${API_BASE_URL}/api/ai-resume/ai-insights`, {
         achievements: achievements
       }, {
         headers: {
@@ -146,7 +147,7 @@ const AIResumeBuilder = () => {
 
   const getSkillsRecommendations = async () => {
     try {
-      const response = await axios.post('http://localhost:5000/api/ai-resume/skills-recommendations', {
+      const response = await axios.post(`${API_BASE_URL}/api/ai-resume/skills-recommendations`, {
         currentSkills: skillsAnalysis,
         jobDescription: jobDescription
       }, {
@@ -166,7 +167,7 @@ const AIResumeBuilder = () => {
 
   const generateCareerObjective = async () => {
     try {
-      const response = await axios.post('http://localhost:5000/api/ai-resume/career-objective', {
+      const response = await axios.post(`${API_BASE_URL}/api/ai-resume/career-objective`, {
         studentProfile: {
           name: studentData.user.name,
           department: studentData.department

@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../../styles/AdminPanel.css';
+import { API_BASE_URL } from '../../utils/constants';
 
 const StudentProfilePage = () => {
   const [profile, setProfile] = useState(null);
@@ -14,7 +15,7 @@ const StudentProfilePage = () => {
       try {
         const userEmail = user?.email;
         const res = await axios.get(
-          `http://localhost:5000/api/test/get-profile-dynamic?email=${userEmail}`
+          `${API_BASE_URL}/api/test/get-profile-dynamic?email=${userEmail}`
         );
         setProfile(res.data.student);
       } catch (err) {
