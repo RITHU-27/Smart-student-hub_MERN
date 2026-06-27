@@ -261,7 +261,7 @@ const Register = () => {
     } catch (err) {
       console.error('Registration error:', err);
       if (err.response?.data?.message) {
-        if (err.response.data.message.includes('already exists')) {
+        if (err.response.data.message === 'User already exists') {
           setErrors({
             general: 'This email is already registered. Please use a different email or login.'
           });
