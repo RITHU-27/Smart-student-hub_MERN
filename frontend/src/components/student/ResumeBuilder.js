@@ -51,12 +51,6 @@ const ResumeBuilder = () => {
     }
   }, [userEmail]);
 
-  useEffect(() => {
-    if (studentId) {
-      fetchResumeHistory();
-    }
-  }, [studentId]); // Remove fetchResumeHistory from dependencies to prevent infinite loop
-
   const fetchResumeHistory = useCallback(async () => {
     try {
       setLoading(true);
@@ -82,6 +76,12 @@ const ResumeBuilder = () => {
       setLoading(false);
     }
   }, [studentId]);
+
+  useEffect(() => {
+    if (studentId) {
+      fetchResumeHistory();
+    }
+  }, [studentId, fetchResumeHistory]);
 
   const generateResume = async () => {
     try {

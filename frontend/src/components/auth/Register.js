@@ -29,7 +29,7 @@ const Register = () => {
   });
 
   const [errors, setErrors] = useState({});
-  const [touched, setTouched] = useState({});
+  const [touched, setTouched] = useState({}); // eslint-disable-line no-unused-vars
   const [loading, setLoading] = useState(false);
   const [passwordStrength, setPasswordStrength] = useState(0);
 
@@ -182,6 +182,8 @@ const Register = () => {
           fieldErrors[name] = 'Invalid admin code';
         }
         break;
+      default:
+        break;
     }
 
     setErrors(prev => ({
@@ -190,9 +192,7 @@ const Register = () => {
     }));
   };
 
-  const validateForm = () => {
-    const newErrors = {};
-    
+  const validateForm = () => { // eslint-disable-line no-unused-vars
     // Validate all required fields based on role
     const requiredFields = ['name', 'email', 'password', 'confirmPassword'];
     

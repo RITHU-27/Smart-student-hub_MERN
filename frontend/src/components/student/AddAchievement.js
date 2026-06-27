@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../../styles/AddAchievement.css';
-import { calculateActivityPoints, getSubCategories, isValidCombination } from '../../utils/activityPointsCalculator';
+import { calculateActivityPoints, getSubCategories } from '../../utils/activityPointsCalculator';
 
 const AddAchievement = ({ onClose, onSuccess, userEmail }) => {
   const [formData, setFormData] = useState({
@@ -43,7 +43,7 @@ const AddAchievement = ({ onClose, onSuccess, userEmail }) => {
         subCategory: subCategories[0] || 'other'
       }));
     }
-  }, [formData.category]);
+  }, [formData.category, formData.subCategory]);
 
   // Automatically calculate credits when category, subcategory, or level changes
   useEffect(() => {

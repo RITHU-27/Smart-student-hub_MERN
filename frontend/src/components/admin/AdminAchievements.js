@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import '../../styles/AdminPanel.css';
 import TopStudents from '../common/TopStudents';
-import { calculateTopStudents } from '../../utils/topStudentsCalculator';
 
 const AdminAchievements = () => {
   const [achievements, setAchievements] = useState([]);

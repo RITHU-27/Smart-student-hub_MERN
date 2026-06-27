@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 import {
   BarChart, Bar, PieChart, Pie, Cell,
@@ -13,11 +13,7 @@ const AdminReportsPage = () => {
   const [loading, setLoading] = useState(true);
   const [stats, setStats] = useState({ total: 0, approved: 0, rejected: 0, pending: 0 });
 
-  useEffect(() => {
-    fetchAchievements();
-  }, []);
-
-  const fetchAchievements = async () => {
+  const fetchAchievements = useCallback(async () => {
     try {
       setLoading(true);
       const token = localStorage.getItem('token');
@@ -32,7 +28,11 @@ const AdminReportsPage = () => {
       console.error('Error fetching reports:', err);
       setLoading(false);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    fetchAchievements();
+  }, [fetchAchievements]);
 
   const calculateStats = (data) => {
     const stats = { total: data.length, approved: 0, rejected: 0, pending: 0 };

@@ -1,5 +1,5 @@
 // frontend/src/components/faculty/FacultyStudents.js
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 import { API_BASE_URL } from '../../utils/constants';
 import '../../styles/AdminPanel.css';
@@ -14,7 +14,7 @@ const FacultyStudents = () => {
   const token = localStorage.getItem('token');
 
   // === Fetch all students under this faculty ===
-  const fetchStudents = async () => {
+  const fetchStudents = useCallback(async () => {
     try {
       setLoading(true);
       const res = await axios.get(`${API_BASE_URL}/api/students/for-faculty`, {
@@ -28,11 +28,11 @@ const FacultyStudents = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [token]);
 
   useEffect(() => {
     fetchStudents();
-  }, []);
+  }, [fetchStudents]);
 
   // === Download Portfolio PDF ===
   const handleDownloadPortfolio = async (student) => {

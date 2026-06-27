@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 import { API_BASE_URL } from '../../utils/constants';
 import '../../styles/AdminPanel.css';
@@ -12,7 +12,7 @@ const AllAchievements = () => {
   const token = localStorage.getItem('token');
 
   // ===== Fetch Student's Own Achievements =====
-  const fetchAllAchievements = async () => {
+  const fetchAllAchievements = useCallback(async () => {
     try {
       setLoading(true);
 
@@ -40,11 +40,11 @@ const AllAchievements = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [user?.email, token]);
 
   useEffect(() => {
     fetchAllAchievements();
-  }, []);
+  }, [fetchAllAchievements]);
 
   const handleLogout = () => {
     localStorage.removeItem('token');

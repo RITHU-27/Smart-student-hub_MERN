@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import '../../styles/AdminPanel.css';
 import TopStudents from '../common/TopStudents';
-import { calculateTopStudents } from '../../utils/topStudentsCalculator';
 
 const AdminPanel = () => {
   const [pendingAchievements, setPendingAchievements] = useState([]);
@@ -29,7 +28,7 @@ const AdminPanel = () => {
       const token = localStorage.getItem('token');
       
       // Fetch statistics directly from the API endpoint we created
-      const statsResponse = await axios.get('http://localhost:5000/api/admin/statistics', {
+      await axios.get('http://localhost:5000/api/admin/statistics', {
         headers: { Authorization: `Bearer ${token}` }
       });
       
