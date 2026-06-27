@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import '../../styles/AdminPanel.css';
 import TopStudents from '../common/TopStudents';
+import { API_BASE_URL } from '../../utils/constants';
 
 const AdminAchievements = () => {
   const [achievements, setAchievements] = useState([]);
@@ -24,10 +25,10 @@ const AdminAchievements = () => {
       const token = localStorage.getItem('token');
       
       const [achievementsRes, topStudentsRes] = await Promise.all([
-        axios.get('http://localhost:5000/api/admin/all-achievements', {
+        axios.get(`${API_BASE_URL}/api/admin/all-achievements`, {
           headers: { Authorization: `Bearer ${token}` },
         }),
-        axios.get('http://localhost:5000/api/test/top-students', {
+        axios.get(`${API_BASE_URL}/api/test/top-students`, {
           headers: { Authorization: `Bearer ${token}` }
         })
       ]);
@@ -81,7 +82,7 @@ const AdminAchievements = () => {
     try {
       const token = localStorage.getItem('token');
       await axios.put(
-        `http://localhost:5000/api/achievements/${id}/verify`,
+        `${API_BASE_URL}/api/achievements/${id}/verify`,
         { status: 'approved' },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -99,7 +100,7 @@ const AdminAchievements = () => {
     try {
       const token = localStorage.getItem('token');
       await axios.put(
-        `http://localhost:5000/api/achievements/${id}/verify`,
+        `${API_BASE_URL}/api/achievements/${id}/verify`,
         { status: 'rejected', reason },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -234,7 +235,7 @@ const AdminAchievements = () => {
                       )}
                       {ach.certificateFile && ach.certificateFile.path && (
                         <a
-                          href={`http://localhost:5000${ach.certificateFile.path}`}
+                          href={`${API_BASE_URL}${ach.certificateFile.path}`}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="view-certificate"
@@ -302,7 +303,7 @@ const AdminAchievements = () => {
               )}
               {selectedAchievement.certificateFile && (
                 <a
-                  href={`http://localhost:5000${selectedAchievement.certificateFile.path}`}
+                  href={`${API_BASE_URL}${selectedAchievement.certificateFile.path}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="view-certificate"

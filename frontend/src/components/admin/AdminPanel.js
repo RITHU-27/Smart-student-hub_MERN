@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import '../../styles/AdminPanel.css';
 import TopStudents from '../common/TopStudents';
+import { API_BASE_URL } from '../../utils/constants';
 
 const AdminPanel = () => {
   const [pendingAchievements, setPendingAchievements] = useState([]);
@@ -28,16 +29,16 @@ const AdminPanel = () => {
       const token = localStorage.getItem('token');
       
       // Fetch statistics directly from the API endpoint we created
-      await axios.get('http://localhost:5000/api/admin/statistics', {
+      await axios.get(`${API_BASE_URL}/api/admin/statistics`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       
       // Fetch pending achievements
       const [allAchievementsRes, topStudentsRes] = await Promise.all([
-        axios.get('http://localhost:5000/api/admin/all-achievements', {
+        axios.get(`${API_BASE_URL}/api/admin/all-achievements`, {
           headers: { Authorization: `Bearer ${token}` }
         }),
-        axios.get('http://localhost:5000/api/test/top-students', {
+        axios.get(`${API_BASE_URL}/api/test/top-students`, {
           headers: { Authorization: `Bearer ${token}` }
         })
       ]);
@@ -76,7 +77,7 @@ const AdminPanel = () => {
     try {
       const token = localStorage.getItem('token');
       await axios.put(
-        `http://localhost:5000/api/achievements/${achievementId}/verify`,
+        `${API_BASE_URL}/api/achievements/${achievementId}/verify`,
         { status: 'approved' },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -96,7 +97,7 @@ const AdminPanel = () => {
     try {
       const token = localStorage.getItem('token');
       await axios.put(
-        `http://localhost:5000/api/achievements/${achievementId}/verify`,
+        `${API_BASE_URL}/api/achievements/${achievementId}/verify`,
         { status: 'rejected', reason },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -117,7 +118,7 @@ const AdminPanel = () => {
   const handleExportPDF = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:5000/api/admin/export-achievements', {
+      const response = await axios.get(`${API_BASE_URL}/api/admin/export-achievements`, {
         responseType: 'blob',
         headers: { Authorization: `Bearer ${token}` }
       });
@@ -295,7 +296,7 @@ const AdminPanel = () => {
                     )}
                     {ach.certificateFile && (
                       <a 
-                        href={`http://localhost:5000${ach.certificateFile.path}`}
+                        href={`${API_BASE_URL}${ach.certificateFile.path}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="view-certificate"
@@ -381,7 +382,7 @@ const AdminPanel = () => {
               {selectedAchievement.certificateFile && selectedAchievement.certificateFile.path && (
                 <div className="certificate-container">
                   <a
-                    href={`http://localhost:5000${selectedAchievement.certificateFile.path}`}
+                    href={`${API_BASE_URL}${selectedAchievement.certificateFile.path}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="certificate-link"

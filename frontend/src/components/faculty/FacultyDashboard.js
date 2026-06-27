@@ -30,7 +30,7 @@ const FacultyDashboard = () => {
   const fetchFacultyProfile = useCallback(async () => {
     try {
       console.log('🔍 Fetching faculty profile...');
-      const response = await axios.get('http://localhost:5000/api/faculty/profile', {
+      const response = await axios.get(`${API_BASE_URL}/api/faculty/profile`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       console.log('✅ Faculty profile response:', response.data);
@@ -231,7 +231,7 @@ const FacultyDashboard = () => {
             Faculty data: {facultyData ? 'Loaded' : 'Not loaded'}<br/>
             API Endpoints: <br/>
             - Achievements: {API_ENDPOINTS.ACHIEVEMENTS.ALL}<br/>
-            - Faculty Profile: http://localhost:5000/api/faculty/profile
+            - Faculty Profile: ${API_BASE_URL}/api/faculty/profile
           </div>
           <button onClick={loadDashboard} className="retry-btn">
             Retry
@@ -504,7 +504,7 @@ const FacultyDashboard = () => {
               )}
               {selectedAchievement.certificate && (
                 <a
-                  href={`http://localhost:5000${selectedAchievement.certificate}`}
+                  href={`${API_BASE_URL}${selectedAchievement.certificate}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="certificate-link"

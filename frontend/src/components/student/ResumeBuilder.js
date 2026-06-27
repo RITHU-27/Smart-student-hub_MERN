@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import '../../styles/ResumeBuilder.css';
+import { API_BASE_URL } from '../../utils/constants';
 
 const ResumeBuilder = () => {
   const [resumeData, setResumeData] = useState(null);
@@ -26,7 +27,7 @@ const ResumeBuilder = () => {
         console.log('Fetching student profile for email:', userEmail);
         console.log('Token:', token ? 'exists' : 'missing');
         
-        const response = await axios.get(`http://localhost:5000/api/test/get-profile-dynamic?email=${userEmail}`, {
+        const response = await axios.get(`${API_BASE_URL}/api/test/get-profile-dynamic?email=${userEmail}`, {
           headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
@@ -58,7 +59,7 @@ const ResumeBuilder = () => {
       console.log('Fetching resume history for studentId:', studentId);
       console.log('Token:', token ? 'exists' : 'missing');
       
-      const response = await axios.get(`http://localhost:5000/api/resume/history/${studentId}`, {
+      const response = await axios.get(`${API_BASE_URL}/api/resume/history/${studentId}`, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
@@ -70,7 +71,7 @@ const ResumeBuilder = () => {
       console.error('Error fetching resume history:', err);
       console.error('Error response:', err.response?.data);
       console.error('Error status:', err.response?.status);
-      console.error('Error URL:', `http://localhost:5000/api/resume/history/${studentId}`);
+      console.error('Error URL:', `${API_BASE_URL}/api/resume/history/${studentId}`);
       setError(`Failed to fetch resume history: ${err.response?.data?.message || err.message}`);
     } finally {
       setLoading(false);
@@ -94,7 +95,7 @@ const ResumeBuilder = () => {
       console.log('Template:', selectedTemplate);
       console.log('Token exists:', !!token);
 
-      const response = await axios.post('http://localhost:5000/api/ai-resume/generate-ai-resume', {
+      const response = await axios.post(`${API_BASE_URL}/api/ai-resume/generate-ai-resume`, {
         studentId: studentId,
         template: selectedTemplate,
         jobDescription: jobDescription,
@@ -119,7 +120,7 @@ const ResumeBuilder = () => {
       console.error('Error response:', err.response?.data);
       console.error('Error status:', err.response?.status);
       console.error('Student ID used:', studentId);
-      console.error('Request URL:', 'http://localhost:5000/api/ai-resume/generate-ai-resume');
+      console.error('Request URL:', `${API_BASE_URL}/api/ai-resume/generate-ai-resume`);
       
       let errorMessage = 'Failed to generate AI resume';
       if (err.response?.data?.message) {
@@ -136,7 +137,7 @@ const ResumeBuilder = () => {
 
   const downloadPDF = async (resumeId) => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/resume/pdf/${resumeId}`, {
+      const response = await axios.get(`${API_BASE_URL}/api/resume/pdf/${resumeId}`, {
         responseType: 'blob'
       });
       
@@ -161,7 +162,7 @@ const ResumeBuilder = () => {
     }
 
     try {
-      await axios.delete(`http://localhost:5000/api/resume/${resumeId}`);
+      await axios.delete(`${API_BASE_URL}/api/resume/${resumeId}`);
       await fetchResumeHistory();
       
       if (resumeData && resumeData.id === resumeId) {
