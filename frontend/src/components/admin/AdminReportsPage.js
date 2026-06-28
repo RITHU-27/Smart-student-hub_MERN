@@ -5,6 +5,7 @@ import {
   XAxis, YAxis, Tooltip, Legend, ResponsiveContainer
 } from 'recharts';
 import '../../styles/AdminPanel.css';
+import { API_BASE_URL } from '../../utils/constants';
 
 const AdminReportsPage = () => {
   const [achievements, setAchievements] = useState([]);
@@ -17,7 +18,7 @@ const AdminReportsPage = () => {
     try {
       setLoading(true);
       const token = localStorage.getItem('token');
-      const res = await axios.get('http://localhost:5000/api/admin/all-achievements', {
+      const res = await axios.get(`${API_BASE_URL}/api/admin/all-achievements`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setAchievements(res.data.achievements || []);
@@ -66,7 +67,7 @@ const AdminReportsPage = () => {
   const handleExportPDF = async () => {
     try {
       const token = localStorage.getItem('token');
-      const res = await axios.get('http://localhost:5000/api/admin/export-achievements', {
+      const res = await axios.get(`${API_BASE_URL}/api/admin/export-achievements`, {
         responseType: 'blob',
         headers: { Authorization: `Bearer ${token}` }
       });

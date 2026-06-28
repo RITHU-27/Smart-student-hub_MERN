@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../../styles/AddAchievement.css';
+import { API_BASE_URL } from '../../utils/constants';
 import { calculateActivityPoints, getSubCategories } from '../../utils/activityPointsCalculator';
 
 const AddAchievement = ({ onClose, onSuccess, userEmail }) => {
@@ -168,7 +169,7 @@ const AddAchievement = ({ onClose, onSuccess, userEmail }) => {
         console.log("Submitting with certificate and email:", userEmail || formData.email);
 
         await axios.post(
-          'http://localhost:5000/api/test/upload-achievement',
+          `${API_BASE_URL}/api/test/upload-achievement`,
           uploadData,
           {
             headers: {

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import "../../styles/AdminPanel.css";
+import { API_BASE_URL } from '../../utils/constants';
 import AddAchievement from "./AddAchievement";
 
 const StudentDashboard = () => {
@@ -38,13 +39,13 @@ const StudentDashboard = () => {
       }
 
       const [profileRes, achievementsRes] = await Promise.all([
-        axios.get(`http://localhost:5000/api/test/get-profile-dynamic?email=${userEmail}`, {
+        axios.get(`${API_BASE_URL}/api/test/get-profile-dynamic?email=${userEmail}`, {
           headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
           }
         }),
-        axios.get(`http://localhost:5000/api/test/achievements-dynamic?email=${userEmail}`, {
+        axios.get(`${API_BASE_URL}/api/test/achievements-dynamic?email=${userEmail}`, {
           headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../../styles/AdminPanel.css";
+import { API_BASE_URL } from '../../utils/constants';
 
 const StudentsPage = () => {
   const [students, setStudents] = useState([]);
@@ -21,7 +22,7 @@ const StudentsPage = () => {
     try {
       setLoading(true);
       const token = localStorage.getItem("token");
-      const response = await axios.get("http://localhost:5000/api/admin/students", {
+      const response = await axios.get(`${API_BASE_URL}/api/admin/students`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -41,7 +42,7 @@ const StudentsPage = () => {
   const fetchFaculties = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.get("http://localhost:5000/api/admin/faculties", {
+      const response = await axios.get(`${API_BASE_URL}/api/admin/faculties`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setFaculties(response.data.faculties || []);
@@ -71,7 +72,7 @@ const StudentsPage = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.get(
-        `http://localhost:5000/api/admin/student/${studentId}/portfolio`,
+        `${API_BASE_URL}/api/admin/student/${studentId}/portfolio`,
         {
           responseType: "blob",
           headers: { Authorization: `Bearer ${token}` },
