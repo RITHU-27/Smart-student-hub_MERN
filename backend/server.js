@@ -22,7 +22,10 @@ const { authenticateUser, authorizeRole } = require('./middleware/authMiddleware
 const app = express();
 
 // Middleware - MUST BE BEFORE ROUTES
-app.use(cors());
+app.use(cors({
+  origin: ['https://smart-student-hub-mern-git-main-rithanyaa-v-s-projects.vercel.app', 'http://localhost:3000'],
+  credentials: true
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
