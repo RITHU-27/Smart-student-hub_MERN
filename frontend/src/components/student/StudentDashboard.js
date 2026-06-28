@@ -3,6 +3,7 @@ import axios from "axios";
 import "../../styles/AdminPanel.css";
 import { API_BASE_URL } from '../../utils/constants';
 import AddAchievement from "./AddAchievement";
+import AIResumeBuilder from "./AIResumeBuilder";
 
 const StudentDashboard = () => {
   const [profile, setProfile] = useState(null);
@@ -10,7 +11,7 @@ const StudentDashboard = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [showAddModal, setShowAddModal] = useState(false);
-  const [activeView, setActiveView] = useState('dashboard'); // dashboard, achievements, profile, portfolio
+  const [activeView, setActiveView] = useState('dashboard'); // dashboard, achievements, profile, portfolio, ai-resume
 
   const user = JSON.parse(localStorage.getItem("user"));
 
@@ -546,6 +547,12 @@ const StudentDashboard = () => {
                 Download Portfolio
               </button>
             </li>
+            <li className={activeView === 'ai-resume' ? 'active' : ''}>
+              <button onClick={() => setActiveView('ai-resume')} className="nav-link">
+                <span className="icon">🤖</span>
+                AI Resume Builder
+              </button>
+            </li>
           </ul>
         </nav>
 
@@ -576,6 +583,7 @@ const StudentDashboard = () => {
         {activeView === 'achievements' && renderAchievementsView()}
         {activeView === 'profile' && renderProfileView()}
         {activeView === 'portfolio' && renderPortfolioView()}
+        {activeView === 'ai-resume' && <AIResumeBuilder />}
       </main>
 
       {/* Add Achievement Modal */}
