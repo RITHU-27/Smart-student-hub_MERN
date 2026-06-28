@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import '../../styles/AdminPanel.css';
 import { API_BASE_URL } from '../../utils/constants';
@@ -10,7 +10,6 @@ const AIResumeBuilder = () => {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [resumeContent, setResumeContent] = useState(null);
-  const [analysis, setAnalysis] = useState(null);
   
   // Form states
   const [selectedTemplate, setSelectedTemplate] = useState('modern');
@@ -27,11 +26,7 @@ const AIResumeBuilder = () => {
   const user = JSON.parse(localStorage.getItem('user'));
   const token = localStorage.getItem('token');
 
-  useEffect(() => {
-    loadStudentData();
-  }, []);
-
-  const loadStudentData = async () => {
+  const loadStudentData = useCallback(async () => {
     try {
       setLoading(true);
       setError('');
@@ -61,7 +56,11 @@ const AIResumeBuilder = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [user?.email, token]);
+
+  useEffect(() => {
+    loadStudentData();
+  }, [loadStudentData]);
 
   const generateResume = async () => {
     try {
@@ -82,7 +81,6 @@ const AIResumeBuilder = () => {
       });
       
       setResumeContent(response.data.content);
-      setAnalysis(response.data.analysis);
       setSuccess('AI Resume generated successfully!');
       
       // Generate resume score
