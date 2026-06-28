@@ -203,48 +203,30 @@ const StudentDashboard = () => {
         </div>
       </section>
 
-      {/* Student Profile Section */}
-      <section className="student-profile-section">
-        <h2>Student Profile</h2>
-        <div className="profile-card">
-          {profile ? (
-            <div className="profile-details">
-              <div className="profile-row">
-                <span className="label"><strong>Name:</strong></span>
-                <span className="value">{profile.user?.name || 'N/A'}</span>
-              </div>
-              <div className="profile-row">
-                <span className="label"><strong>Email:</strong></span>
-                <span className="value">{profile.user?.email || 'N/A'}</span>
-              </div>
-              <div className="profile-row">
-                <span className="label"><strong>Student ID:</strong></span>
-                <span className="value">{profile.studentId || 'N/A'}</span>
-              </div>
-              <div className="profile-row">
-                <span className="label"><strong>Department:</strong></span>
-                <span className="value">{profile.department || 'N/A'}</span>
-              </div>
-              <div className="profile-row">
-                <span className="label"><strong>Batch:</strong></span>
-                <span className="value">{profile.batch || 'N/A'}</span>
-              </div>
-              <div className="profile-row">
-                <span className="label"><strong>Semester:</strong></span>
-                <span className="value">{profile.semester || 'N/A'}</span>
-              </div>
-              <div className="profile-row">
-                <span className="label"><strong>CGPA:</strong></span>
-                <span className="value">{profile.cgpa || '0'}</span>
-              </div>
-              <div className="profile-row">
-                <span className="label"><strong>Attendance:</strong></span>
-                <span className="value">{profile.attendance || '0'}%</span>
-              </div>
-            </div>
-          ) : (
-            <p>No profile data available</p>
-          )}
+      {/* AI Resume Quick Actions */}
+      <section className="ai-resume-quick-actions">
+        <h2>AI Resume Builder</h2>
+        <div className="ai-actions-grid">
+          <div className="ai-action-card" onClick={() => setActiveView('ai-resume')}>
+            <div className="ai-action-icon">🤖</div>
+            <h3>Generate AI Resume</h3>
+            <p>Create an AI-optimized resume using your achievements and profile</p>
+          </div>
+          <div className="ai-action-card" onClick={() => setActiveView('ai-resume')}>
+            <div className="ai-action-icon">📊</div>
+            <h3>Analyze Skills</h3>
+            <p>Get AI-powered analysis of your skills from achievements</p>
+          </div>
+          <div className="ai-action-card" onClick={() => setActiveView('ai-resume')}>
+            <div className="ai-action-icon">💡</div>
+            <h3>Get AI Insights</h3>
+            <p>Receive personalized recommendations for resume improvement</p>
+          </div>
+          <div className="ai-action-card" onClick={() => setActiveView('portfolio')}>
+            <div className="ai-action-icon">📄</div>
+            <h3>Download Portfolio</h3>
+            <p>Download your complete portfolio as PDF</p>
+          </div>
         </div>
       </section>
 
