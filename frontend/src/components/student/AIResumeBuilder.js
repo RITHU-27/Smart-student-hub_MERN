@@ -60,6 +60,7 @@ const AIResumeBuilder = () => {
 
   useEffect(() => {
     loadStudentData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loadStudentData]);
 
   const generateResume = async () => {
