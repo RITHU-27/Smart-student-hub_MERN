@@ -254,7 +254,13 @@ const Register = () => {
     try {
       console.log('Sending registration data:', formData);
 
-      await axios.post(`${API_BASE_URL}/api/auth/register`, formData);
+      // Prepare data with correct types
+      const registrationData = {
+        ...formData,
+        semester: formData.semester ? parseInt(formData.semester) : 1
+      };
+
+      await axios.post(`${API_BASE_URL}/api/auth/register`, registrationData);
 
       alert('Registration successful! Please login.');
       navigate('/login');
