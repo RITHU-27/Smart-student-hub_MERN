@@ -329,8 +329,9 @@ const Register = () => {
 
           {/* Common fields */}
           <div className="form-group">
-            <label>Full Name *</label>
+            <label htmlFor="name">Full Name *</label>
             <input
+              id="name"
               type="text"
               name="name"
               value={formData.name}
@@ -338,13 +339,15 @@ const Register = () => {
               onBlur={handleBlur}
               placeholder="Enter your full name"
               className={errors.name ? 'error' : ''}
+              autoComplete="name"
             />
             {errors.name && <span className="field-error">{errors.name}</span>}
           </div>
 
           <div className="form-group">
-            <label>Email *</label>
+            <label htmlFor="email">Email *</label>
             <input
+              id="email"
               type="email"
               name="email"
               value={formData.email}
@@ -352,14 +355,16 @@ const Register = () => {
               onBlur={handleBlur}
               placeholder="Enter your email"
               className={errors.email ? 'error' : ''}
+              autoComplete="email"
             />
             {errors.email && <span className="field-error">{errors.email}</span>}
           </div>
 
           <div className="form-row">
             <div className="form-group">
-              <label>Password *</label>
+              <label htmlFor="password">Password *</label>
               <input
+                id="password"
                 type="password"
                 name="password"
                 value={formData.password}
@@ -367,6 +372,7 @@ const Register = () => {
                 onBlur={handleBlur}
                 placeholder="Create password (min 8 chars)"
                 className={errors.password ? 'error' : ''}
+                autoComplete="new-password"
               />
               {errors.password && <span className="field-error">{errors.password}</span>}
               {formData.password && (
@@ -391,8 +397,9 @@ const Register = () => {
             </div>
 
             <div className="form-group">
-              <label>Confirm Password *</label>
+              <label htmlFor="confirmPassword">Confirm Password *</label>
               <input
+                id="confirmPassword"
                 type="password"
                 name="confirmPassword"
                 value={formData.confirmPassword}
@@ -400,6 +407,7 @@ const Register = () => {
                 onBlur={handleBlur}
                 placeholder="Confirm password"
                 className={errors.confirmPassword ? 'error' : ''}
+                autoComplete="new-password"
               />
               {errors.confirmPassword && (
                 <span className="field-error">{errors.confirmPassword}</span>
@@ -410,14 +418,16 @@ const Register = () => {
           {/* Admin Registration Fields */}
           {formData.role === 'admin' && (
             <div className="form-group">
-              <label>Admin Access Code *</label>
+              <label htmlFor="adminCode">Admin Access Code *</label>
               <input
+                id="adminCode"
                 type="password"
                 name="adminCode"
                 value={formData.adminCode}
                 onChange={handleChange}
                 placeholder="Enter admin access code"
                 className={errors.adminCode ? 'error' : ''}
+                autoComplete="off"
               />
               {errors.adminCode && <span className="field-error">{errors.adminCode}</span>}
             </div>
@@ -426,12 +436,14 @@ const Register = () => {
 {formData.role === 'faculty' && (
   <>
     <div className="form-group">
-      <label>Department *</label>
+      <label htmlFor="faculty-department">Department *</label>
       <select
+        id="faculty-department"
         name="department"
         value={formData.department}
         onChange={handleChange}
         className={errors.department ? 'error' : ''}
+        autoComplete="organization-title"
       >
         <option value="">Select Department</option>
         <option value="ARTIFICIAL INTELLIGENCE AND DATA SCIENCE">ARTIFICIAL INTELLIGENCE AND DATA SCIENCE</option>
@@ -453,8 +465,9 @@ const Register = () => {
     </div>
 
     <div className="form-group">
-      <label>Phone Number *</label>
+      <label htmlFor="faculty-phone">Phone Number *</label>
       <input
+        id="faculty-phone"
         type="tel"
         name="phone"
         value={formData.phone}
@@ -462,18 +475,21 @@ const Register = () => {
         placeholder="10-digit phone number"
         maxLength="10"
         className={errors.phone ? 'error' : ''}
+        autoComplete="tel"
       />
       {errors.phone && <span className="field-error">{errors.phone}</span>}
     </div>
 
     <div className="form-group">
-      <label>Address</label>
+      <label htmlFor="faculty-address">Address</label>
       <textarea
+        id="faculty-address"
         name="address"
         value={formData.address}
         onChange={handleChange}
         placeholder="Enter your address"
         rows="2"
+        autoComplete="street-address"
       />
     </div>
   </>
@@ -491,27 +507,31 @@ const Register = () => {
             <>
               <div className="form-row">
                 <div className="form-group">
-                  <label>Student ID *</label>
+                  <label htmlFor="studentId">Student ID *</label>
                   <input
+                    id="studentId"
                     type="text"
                     name="studentId"
                     value={formData.studentId}
                     onChange={handleChange}
                     placeholder="e.g., 2021CS001"
                     className={errors.studentId ? 'error' : ''}
+                    autoComplete="username"
                   />
                   {errors.studentId && <span className="field-error">{errors.studentId}</span>}
                 </div>
 
                 <div className="form-group">
-                  <label>Roll Number *</label>
+                  <label htmlFor="rollNumber">Roll Number *</label>
                   <input
+                    id="rollNumber"
                     type="text"
                     name="rollNumber"
                     value={formData.rollNumber}
                     onChange={handleChange}
                     placeholder="e.g., 21CS001"
                     className={errors.rollNumber ? 'error' : ''}
+                    autoComplete="off"
                   />
                   {errors.rollNumber && <span className="field-error">{errors.rollNumber}</span>}
                 </div>
@@ -519,12 +539,14 @@ const Register = () => {
 
               <div className="form-row">
                 <div className="form-group">
-                  <label>Department *</label>
+                  <label htmlFor="student-department">Department *</label>
                   <select
+                    id="student-department"
                     name="department"
                     value={formData.department}
                     onChange={handleChange}
                     className={errors.department ? 'error' : ''}
+                    autoComplete="organization-title"
                   >
                     <option value="">Select Department</option>
                     <option value="ARTIFICIAL INTELLIGENCE AND DATA SCIENCE">ARTIFICIAL INTELLIGENCE AND DATA SCIENCE</option>
@@ -546,12 +568,14 @@ const Register = () => {
                 </div>
 
                 <div className="form-group">
-                  <label>Batch *</label>
+                  <label htmlFor="batch">Batch *</label>
                   <select
+                    id="batch"
                     name="batch"
                     value={formData.batch}
                     onChange={handleChange}
                     className={errors.batch ? 'error' : ''}
+                    autoComplete="organization-title"
                   >
                     <option value="">Select Batch</option>
                     <option value="2020">2020</option>
@@ -567,12 +591,14 @@ const Register = () => {
 
               <div className="form-row">
                 <div className="form-group">
-                  <label>Current Semester *</label>
+                  <label htmlFor="semester">Current Semester *</label>
                   <select
+                    id="semester"
                     name="semester"
                     value={formData.semester}
                     onChange={handleChange}
                     className={errors.semester ? 'error' : ''}
+                    autoComplete="off"
                   >
                     <option value="">Select Semester</option>
                     {[1, 2, 3, 4, 5, 6, 7, 8].map(sem => (
@@ -585,8 +611,8 @@ const Register = () => {
                 </div>
 
                 <div className="form-group">
-                  <label>Section</label>
-                  <select name="section" value={formData.section} onChange={handleChange}>
+                  <label htmlFor="section">Section</label>
+                  <select id="section" name="section" value={formData.section} onChange={handleChange} autoComplete="off">
                     <option value="A">A</option>
                     <option value="B">B</option>
                     <option value="C">C</option>
@@ -597,8 +623,9 @@ const Register = () => {
 
               <div className="form-row">
                 <div className="form-group">
-                  <label>Phone Number *</label>
+                  <label htmlFor="student-phone">Phone Number *</label>
                   <input
+                    id="student-phone"
                     type="tel"
                     name="phone"
                     value={formData.phone}
@@ -606,63 +633,74 @@ const Register = () => {
                     placeholder="10-digit phone number"
                     maxLength="10"
                     className={errors.phone ? 'error' : ''}
+                    autoComplete="tel"
                   />
                   {errors.phone && <span className="field-error">{errors.phone}</span>}
                 </div>
 
                 <div className="form-group">
-                  <label>Date of Birth</label>
+                  <label htmlFor="dateOfBirth">Date of Birth</label>
                   <input
+                    id="dateOfBirth"
                     type="date"
                     name="dateOfBirth"
                     value={formData.dateOfBirth}
                     onChange={handleChange}
+                    autoComplete="bday"
                   />
                 </div>
               </div>
 
               <div className="form-group">
-                <label>Address</label>
+                <label htmlFor="student-address">Address</label>
                 <textarea
+                  id="student-address"
                   name="address"
                   value={formData.address}
                   onChange={handleChange}
                   placeholder="Enter your address"
                   rows="2"
+                  autoComplete="street-address"
                 />
               </div>
 
               <div className="form-row">
                 <div className="form-group">
-                  <label>Parent/Guardian Name</label>
+                  <label htmlFor="parentName">Parent/Guardian Name</label>
                   <input
+                    id="parentName"
                     type="text"
                     name="parentName"
                     value={formData.parentName}
                     onChange={handleChange}
                     placeholder="Parent/Guardian name"
+                    autoComplete="off"
                   />
                 </div>
 
                 <div className="form-group">
-                  <label>Parent Phone</label>
+                  <label htmlFor="parentPhone">Parent Phone</label>
                   <input
+                    id="parentPhone"
                     type="tel"
                     name="parentPhone"
                     value={formData.parentPhone}
                     onChange={handleChange}
                     placeholder="Parent phone number"
                     maxLength="10"
+                    autoComplete="tel"
                   />
                 </div>
               </div>
 
               <div className="form-group">
-                <label>Blood Group</label>
+                <label htmlFor="bloodGroup">Blood Group</label>
                 <select
+                  id="bloodGroup"
                   name="bloodGroup"
                   value={formData.bloodGroup}
                   onChange={handleChange}
+                  autoComplete="off"
                 >
                   <option value="">Select Blood Group</option>
                   <option value="A+">A+</option>
