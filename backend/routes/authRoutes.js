@@ -15,6 +15,13 @@ const JWT_SECRET = process.env.JWT_SECRET || 'changeme';
 -------------------------------------------------- */
 router.post('/register', async (req, res) => {
   try {
+    console.log('=== Registration Request Started ===');
+    console.log('Request body keys:', Object.keys(req.body));
+    console.log('Role:', req.body.role);
+    console.log('Email:', req.body.email);
+    console.log('Department:', req.body.department);
+    console.log('Semester:', req.body.semester, 'Type:', typeof req.body.semester);
+
     const {
       name,
       email,
@@ -44,12 +51,15 @@ router.post('/register', async (req, res) => {
     }
 
     // ✅ Check if user already exists
+    console.log('Checking if user exists...');
     const existingUser = await User.findOne({ email });
     if (existingUser) {
+      console.log('User already exists:', email);
       return res.status(400).json({ message: 'User already exists' });
     }
 
     // ✅ Create new user (password hashed by User model pre-save hook)
+    console.log('Creating new user...');
     const newUser = new User({
       name,
       email,
@@ -57,6 +67,7 @@ router.post('/register', async (req, res) => {
       role: role || 'student'
     });
     await newUser.save();
+    console.log('User created successfully:', newUser._id);
 
     // ✅ Auto-create Student profile if role is 'student'
     if (newUser.role === 'student') {
