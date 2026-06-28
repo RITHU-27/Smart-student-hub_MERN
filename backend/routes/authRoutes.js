@@ -60,28 +60,37 @@ router.post('/register', async (req, res) => {
 
     // ✅ Auto-create Student profile if role is 'student'
     if (newUser.role === 'student') {
-      // try to find faculty for this department and link
-      const facultyForDept = await Faculty.findOne({ department });
+      try {
+        // try to find faculty for this department and link
+        const facultyForDept = await Faculty.findOne({ department });
+        console.log('Faculty found for department:', department, facultyForDept ? facultyForDept._id : 'None');
 
-      const studentProfile = new Student({
-        user: newUser._id,
-        studentId: studentId || `S${Date.now()}`,
-        department: department || 'Unknown',
-        batch: batch || '2024',
-        semester: semester ? parseInt(semester) : 1,
-        rollNumber: rollNumber || '',
-        section: section || 'A',
-        phone: phone || '',
-        dateOfBirth: dateOfBirth || null,
-        address: address || '',
-        parentName: parentName || '',
-        parentPhone: parentPhone || '',
-        bloodGroup: bloodGroup || '',
-        cgpa: 0,
-        attendance: 0,
-        faculty: facultyForDept ? facultyForDept._id : null
-      });
-      await studentProfile.save();
+        const studentProfile = new Student({
+          user: newUser._id,
+          studentId: studentId || `S${Date.now()}`,
+          department: department || 'Unknown',
+          batch: batch || '2024',
+          semester: semester ? parseInt(semester) : 1,
+          rollNumber: rollNumber || '',
+          section: section || 'A',
+          phone: phone || '',
+          dateOfBirth: dateOfBirth || null,
+          address: address || '',
+          parentName: parentName || '',
+          parentPhone: parentPhone || '',
+          bloodGroup: bloodGroup || '',
+          cgpa: 0,
+          attendance: 0,
+          faculty: facultyForDept ? facultyForDept._id : null
+        });
+        await studentProfile.save();
+        console.log('Student profile created successfully');
+      } catch (studentError) {
+        console.error('Error creating student profile:', studentError);
+        // Cleanup user if student profile creation fails
+        await User.findByIdAndDelete(newUser._id);
+        return res.status(500).json({ message: 'Error creating student profile: ' + studentError.message });
+      }
     }
 
         // ✅ Auto-create Faculty profile if role is 'faculty'
