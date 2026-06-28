@@ -300,34 +300,9 @@ const AIResumeBuilder = () => {
   }
 
   return (
-    <div className="admin-dashboard">
-      {/* Sidebar */}
-      <aside className="admin-sidebar">
-        <div className="admin-logo">
-          <h2>Smart Student Hub</h2>
-          <p>AI Resume Builder</p>
-        </div>
-
-        <nav className="admin-nav">
-          <ul>
-            <li>
-              <a href="/dashboard">📊 Dashboard</a>
-            </li>
-            <li className="active">
-              <a href="/ai-resume">🤖 AI Resume</a>
-            </li>
-            <li>
-              <a href="/all-achievements">🏆 Achievements</a>
-            </li>
-            <li>
-              <a href="/resume-builder">📄 Resume Builder</a>
-            </li>
-          </ul>
-        </nav>
-      </aside>
-
+    <div className="ai-resume-container">
       {/* Main Content */}
-      <main className="admin-main">
+      <main className="ai-resume-main">
         <header className="admin-header">
           <h1>🤖 AI-Powered Resume Builder</h1>
           <p>Generate professional resumes with advanced ML algorithms</p>
