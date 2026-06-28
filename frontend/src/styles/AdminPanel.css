@@ -89,6 +89,35 @@
   border-left: 3px solid transparent;
 }
 
+.admin-nav button.nav-link {
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  color: var(--gray-700);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s;
+  border-left: 3px solid transparent;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  border-left: 3px solid transparent;
+}
+
+.admin-nav li.active button.nav-link {
+  background-color: var(--primary-light);
+  color: var(--primary);
+  border-left-color: var(--primary);
+}
+
+.admin-nav button.nav-link:hover {
+  background-color: var(--gray-100);
+  color: var(--gray-900);
+}
+
 .admin-nav li.active a {
   background-color: var(--primary-light);
   color: var(--primary);
@@ -2266,4 +2295,153 @@ button {
     flex-direction: column;
     gap: 0.5rem;
   }
+}
+
+/* ===== Portfolio Download View ===== */
+.portfolio-download-view {
+  padding: 24px;
+}
+
+.portfolio-info {
+  background: white;
+  padding: 32px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.portfolio-info p {
+  color: var(--gray-600);
+  margin-bottom: 24px;
+  line-height: 1.6;
+}
+
+.portfolio-summary {
+  background: var(--gray-50);
+  padding: 24px;
+  border-radius: 8px;
+  margin-bottom: 24px;
+}
+
+.portfolio-summary h3 {
+  color: var(--gray-900);
+  font-size: 18px;
+  margin: 0 0 16px 0;
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.summary-item:last-child {
+  border-bottom: none;
+}
+
+.summary-item .label {
+  color: var(--gray-600);
+  font-weight: 500;
+}
+
+.summary-item .value {
+  color: var(--gray-900);
+  font-weight: 600;
+}
+
+.download-portfolio-btn {
+  background: var(--primary);
+  color: white;
+  padding: 14px 28px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.download-portfolio-btn:hover:not(:disabled) {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+}
+
+.download-portfolio-btn:disabled {
+  background: var(--gray-300);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.warning-text {
+  color: var(--warning);
+  font-size: 14px;
+  margin-top: 12px;
+  font-style: italic;
+}
+
+/* ===== Achievements Full View ===== */
+.achievements-full-view {
+  padding: 24px;
+}
+
+.achievements-full-view .section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.achievements-full-view .achievement-description {
+  margin-top: 12px;
+  padding: 12px;
+  background: var(--gray-50);
+  border-radius: 6px;
+  color: var(--gray-700);
+  font-size: 14px;
+}
+
+.achievements-full-view .achievement-organization {
+  margin-top: 8px;
+  color: var(--gray-600);
+  font-size: 14px;
+}
+
+/* ===== Profile Full View ===== */
+.profile-full-view {
+  padding: 24px;
+}
+
+.profile-full-view .profile-card {
+  background: white;
+  padding: 32px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.profile-full-view .profile-details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 16px;
+}
+
+.profile-full-view .profile-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px;
+  background: var(--gray-50);
+  border-radius: 6px;
+}
+
+.profile-full-view .profile-row .label {
+  color: var(--gray-600);
+  font-weight: 500;
+}
+
+.profile-full-view .profile-row .value {
+  color: var(--gray-900);
+  font-weight: 600;
 }
