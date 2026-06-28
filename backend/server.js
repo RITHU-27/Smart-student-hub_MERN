@@ -23,11 +23,7 @@ const app = express();
 
 // Middleware - MUST BE BEFORE ROUTES
 app.use(cors({
-  origin: [
-    'https://smart-student-hub-mern-git-main-rithanyaa-v-s-projects.vercel.app',
-    'https://smart-student-hub-mern.vercel.app',
-    'http://localhost:3000'
-  ],
+  origin: true,
   credentials: true
 }));
 app.use(express.json());
@@ -1642,6 +1638,203 @@ app.get('/api/test-email', async (req, res) => {
       success: false,
       error: error.message 
     });
+  }
+});
+
+// ================ AI RESUME BUILDER ROUTES ================
+
+// Generate AI Resume
+app.post('/api/ai-resume/generate-ai-resume', authenticateUser, async (req, res) => {
+  try {
+    const { studentId, template, jobDescription, useAI } = req.body;
+    
+    const Student = require('./models/Student');
+    const Achievement = require('./models/Achievement');
+    
+    const student = await Student.findById(studentId).populate('user');
+    if (!student) {
+      return res.status(404).json({ message: 'Student not found' });
+    }
+    
+    const achievements = await Achievement.find({ student: studentId, verificationStatus: 'approved' });
+    
+    // Generate resume content based on template
+    const resumeContent = {
+      header: {
+        name: student.user?.name || 'Student Name',
+        email: student.user?.email || 'email@example.com',
+        phone: student.phone || 'N/A',
+        department: student.department || 'N/A'
+      },
+      summary: useAI 
+        ? `Motivated ${student.department} student with strong academic performance and demonstrated achievements in various extracurricular activities.`
+        : 'Student with academic achievements.',
+      careerObjective: jobDescription 
+        ? `To leverage my skills in ${student.department} and contribute to a dynamic organization.`
+        : '',
+      skills: {
+        technical: [
+          { name: 'Problem Solving', confidence: 0.9 },
+          { name: 'Communication', confidence: 0.85 },
+          { name: 'Teamwork', confidence: 0.88 }
+        ],
+        soft: [
+          { name: 'Leadership', confidence: 0.8 },
+          { name: 'Time Management', confidence: 0.85 }
+        ]
+      },
+      experience: {
+        achievements: achievements.map(a => ({
+          title: a.title,
+          description: a.description || 'Achievement in ' + a.category,
+          organization: a.organization,
+          date: new Date(a.date).toLocaleDateString()
+        }))
+      },
+      education: {
+        institution: 'Smart Student Hub University',
+        department: student.department,
+        studentId: student.studentId,
+        currentSemester: student.semester,
+        batch: student.batch
+      }
+    };
+    
+    res.json({ 
+      message: 'AI Resume generated successfully',
+      content: resumeContent 
+    });
+  } catch (error) {
+    console.error('Error generating AI resume:', error);
+    res.status(500).json({ message: 'Error generating resume', error: error.message });
+  }
+});
+
+// Analyze Skills
+app.post('/api/ai-resume/analyze-skills', authenticateUser, async (req, res) => {
+  try {
+    const { text } = req.body;
+    
+    // Mock skill extraction
+    const commonSkills = [
+      'JavaScript', 'Python', 'React', 'Node.js', 'Problem Solving',
+      'Communication', 'Leadership', 'Teamwork', 'Project Management',
+      'Data Analysis', 'Machine Learning', 'Web Development'
+    ];
+    
+    const foundSkills = commonSkills
+      .filter(skill => text.toLowerCase().includes(skill.toLowerCase()))
+      .map(skill => ({ name: skill, confidence: 0.8 + Math.random() * 0.2 }));
+    
+    res.json({ 
+      message: 'Skills analyzed successfully',
+      skills: foundSkills.length > 0 ? foundSkills : [{ name: 'General Skills', confidence: 0.7 }]
+    });
+  } catch (error) {
+    console.error('Error analyzing skills:', error);
+    res.status(500).json({ message: 'Error analyzing skills', error: error.message });
+  }
+});
+
+// Generate AI Insights
+app.post('/api/ai-resume/ai-insights', authenticateUser, async (req, res) => {
+  try {
+    const { achievements } = req.body;
+    
+    const insights = [
+      { type: 'Strength', message: 'Strong academic performance with consistent achievements', confidence: 0.9 },
+      { type: 'Recommendation', message: 'Consider adding more technical certifications', confidence: 0.8 },
+      { type: 'Opportunity', message: 'Leadership roles in projects could enhance profile', confidence: 0.75 }
+    ];
+    
+    res.json({ 
+      message: 'AI insights generated successfully',
+      insights 
+    });
+  } catch (error) {
+    console.error('Error generating AI insights:', error);
+    res.status(500).json({ message: 'Error generating insights', error: error.message });
+  }
+});
+
+// Skills Recommendations
+app.post('/api/ai-resume/skills-recommendations', authenticateUser, async (req, res) => {
+  try {
+    const { currentSkills, jobDescription } = req.body;
+    
+    const recommendations = {
+      suggestedSkills: [
+        { name: 'Cloud Computing', reason: 'High demand in current job market' },
+        { name: 'DevOps', reason: 'Complements technical skills' },
+        { name: 'Agile Methodology', reason: 'Essential for modern development' }
+      ]
+    };
+    
+    res.json({ 
+      message: 'Skills recommendations generated successfully',
+      recommendations 
+    });
+  } catch (error) {
+    console.error('Error getting skills recommendations:', error);
+    res.status(500).json({ message: 'Error getting recommendations', error: error.message });
+  }
+});
+
+// Career Objective
+app.post('/api/ai-resume/career-objective', authenticateUser, async (req, res) => {
+  try {
+    const { studentProfile, skills, achievements, jobDescription } = req.body;
+    
+    const careerObjective = `To leverage my expertise in ${studentProfile.department} and strong foundation in ${skills.length} key skill areas to contribute meaningfully to a dynamic organization. Committed to continuous learning and professional growth while delivering impactful results.`;
+    
+    res.json({ 
+      message: 'Career objective generated successfully',
+      careerObjective 
+    });
+  } catch (error) {
+    console.error('Error generating career objective:', error);
+    res.status(500).json({ message: 'Error generating career objective', error: error.message });
+  }
+});
+
+// Resume Score
+app.post('/api/ai-resume/resume-score', authenticateUser, async (req, res) => {
+  try {
+    const { resumeContent } = req.body;
+    
+    // Calculate a mock score based on resume content
+    let score = 70;
+    const recommendations = [];
+    
+    if (resumeContent.header?.name) score += 5;
+    else recommendations.push('Add your name to the header');
+    
+    if (resumeContent.skills && Object.keys(resumeContent.skills).length > 0) score += 10;
+    else recommendations.push('Add skills section');
+    
+    if (resumeContent.experience && Object.keys(resumeContent.experience).length > 0) score += 10;
+    else recommendations.push('Add experience/achievements section');
+    
+    if (resumeContent.education) score += 5;
+    else recommendations.push('Add education section');
+    
+    score = Math.min(score, 100);
+    
+    if (recommendations.length === 0) {
+      recommendations.push('Your resume looks great! Consider adding more specific achievements.');
+    }
+    
+    res.json({ 
+      message: 'Resume score calculated successfully',
+      score: {
+        score,
+        feedback: score >= 80 ? 'Excellent resume!' : score >= 60 ? 'Good resume with room for improvement' : 'Resume needs significant improvement',
+        recommendations
+      }
+    });
+  } catch (error) {
+    console.error('Error calculating resume score:', error);
+    res.status(500).json({ message: 'Error calculating resume score', error: error.message });
   }
 });
 
