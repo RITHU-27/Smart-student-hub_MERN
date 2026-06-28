@@ -443,7 +443,7 @@ const Register = () => {
         value={formData.department}
         onChange={handleChange}
         className={errors.department ? 'error' : ''}
-        autoComplete="organization-title"
+        autoComplete="off"
       >
         <option value="">Select Department</option>
         <option value="ARTIFICIAL INTELLIGENCE AND DATA SCIENCE">ARTIFICIAL INTELLIGENCE AND DATA SCIENCE</option>
@@ -546,7 +546,7 @@ const Register = () => {
                     value={formData.department}
                     onChange={handleChange}
                     className={errors.department ? 'error' : ''}
-                    autoComplete="organization-title"
+                    autoComplete="off"
                   >
                     <option value="">Select Department</option>
                     <option value="ARTIFICIAL INTELLIGENCE AND DATA SCIENCE">ARTIFICIAL INTELLIGENCE AND DATA SCIENCE</option>
@@ -575,7 +575,7 @@ const Register = () => {
                     value={formData.batch}
                     onChange={handleChange}
                     className={errors.batch ? 'error' : ''}
-                    autoComplete="organization-title"
+                    autoComplete="off"
                   >
                     <option value="">Select Batch</option>
                     <option value="2020">2020</option>
